@@ -16,7 +16,20 @@
 
 package com.example.android.guesstheword.screens.score
 
+import android.transition.ChangeScroll
+import android.widget.ScrollView
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+
 // TODO (02) Copy over ScoreViewModelFactory - have it also take in a constructor parameter called
 // finalScore
-// TODO (03) In the overridden create method, construct an instance of ScoreViewModel,
+class ScoreViewModelFactory(private val finalScroll: Int) : ViewModelProvider.Factory {
+    // TODO (03) In the overridden create method, construct an instance of ScoreViewModel,
 // passing in finalScore
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ScoreViewModel :: class.java)){
+            return ScoreViewModel(finalScroll) as T
+        }
+        throw IllegalAccessException("Unknown ViewModel class")
+    }
+}
